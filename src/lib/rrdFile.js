@@ -313,6 +313,8 @@ RRDHeader.prototype.calc_idxs = function() {
   this.rra_ptr_el_size=1*this.int_width;
   
   this.header_size=this.rra_ptr_idx+this.rra_ptr_el_size*this.rra_cnt;
+  if(this.rrd_version=="0001")
+    this.header_size-=this.int_width;
 }
 
 // Optional initialization
