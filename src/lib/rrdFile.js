@@ -299,7 +299,9 @@ RRDHeader.prototype.calc_idxs = function() {
   this.live_head_idx=this.rra_def_idx+this.rra_def_el_size*this.rra_cnt;
   // time_t last_up, int last_up_usec
   this.live_head_size=2*this.int_width;
-
+  if(this.rrd_version=='0001') {
+    this.live_head_size-=this.int_width; // rrdv1 uses only one int_width space
+  }
   this.pdp_prep_idx=this.live_head_idx+this.live_head_size;
   // char last_ds[30], unival scratch[10]
   this.pdp_prep_el_size=Math.ceil(30/this.unival_align)*this.unival_align+10*this.unival_width;
